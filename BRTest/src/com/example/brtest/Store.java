@@ -1,14 +1,17 @@
 package com.example.brtest;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
-
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
+import android.os.Parcel;
 
-public class Store {
+public class Store implements Serializable {
 
 
 	private String address;
@@ -17,15 +20,16 @@ public class Store {
 	private String latitude;
 	private String zipcode;
 	private String storeLogoURL;
-	private Bitmap logo;
+	private transient Bitmap logo;
 	private String phone;
 	private String longitude;
 	private String storeID;
 	private String state;
+	private byte[] logoByteArray;
 	
 	public Store()
 	{
-		logo = null;
+//		logo = null;
 	}
 	
 	public void setAddress(String value)
@@ -135,6 +139,10 @@ public class Store {
 				e.printStackTrace();
 			}
 
+			ByteArrayOutputStream blob = new ByteArrayOutputStream();
+			logo.compress(CompressFormat.PNG, 0 /*ignored for PNG*/, blob);
+			logoByteArray = blob.toByteArray();
+			
 			storeLogoURL = value;
 			return logo;
 
@@ -145,6 +153,8 @@ public class Store {
 	}
 	public Bitmap getLogo()
 	{
+		if (logo == null)
+			logo = BitmapFactory.decodeByteArray(logoByteArray , 0, logoByteArray.length);
 		return logo;
 	}
 	
@@ -154,4 +164,32 @@ public class Store {
 	    Bitmap bitmapOrig = Bitmap.createScaledBitmap(bitmap, (int)nw, newHeight, false);
 	    return bitmapOrig;
 	}
+
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public void writeToParcel(Parcel arg0, int arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+    // Converts the Bitmap into a byte array for serialization
+//    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+//        ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+//        bitmap.compress(Bitmap.CompressFormat.PNG, 0, byteStream);
+//        byte bitmapBytes[] = byteStream.toByteArray();
+//        out.write(bitmapBytes, 0, bitmapBytes.length);
+//    }
+//
+//    // Deserializes a byte array representing the Bitmap and decodes it
+//    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+//        ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+//        int b;
+//        while((b = in.read()) != -1)
+//            byteStream.write(b);
+//        byte bitmapBytes[] = byteStream.toByteArray();
+//        bitmap = BitmapFactory.decodeByteArray(bitmapBytes, 0, bitmapBytes.length);
+//    }
 }

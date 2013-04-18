@@ -15,6 +15,11 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.example.brtest.Interfaces.BRTJSONDataLoaderOwner;
+import com.example.brtest.Network.BRTJSONDataLoader;
+import com.example.brtest.Network.CacheManager;
+
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
@@ -37,19 +42,19 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements BRTJSONDataLoaderOwner {
 
 	
 	//Network
-	boolean loadingCache = false;
-	TurnonNetwork turnon = null;
+	//boolean loadingCache = false;
+	//TurnonNetwork turnon = null;
 	 
 	// JSON
-	JSONArray stores = null;
+	//JSONArray stores = null;
 	StoreAdapter storeadapter;
-	JSONLoader jsonloader = null;
+	//JSONLoader jsonloader = null;
 	ArrayList<Store> storeslist;
-	String jstring;
+	//String jstring;
 
 	//Dialog
 	//AlertDialog.Builder builder;
@@ -77,6 +82,9 @@ public class MainActivity extends Activity {
         loading.setVisibility(View.INVISIBLE);
         pbar.setVisibility(View.INVISIBLE);
 		loading.setTextColor(Color.GRAY);
+		
+		CacheManager.activity = this;
+		NetworkManager.activity = this;
         
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() 
 //        {
@@ -112,29 +120,29 @@ public class MainActivity extends Activity {
 //		});
         
 
-        dialogClickListener = new DialogInterface.OnClickListener() 
-        {
-			public void onClick(DialogInterface arg0, int arg1) 
-			{
-				// TODO Auto-generated method stub
-		        switch (arg1)
-		        {
-		        case DialogInterface.BUTTON_POSITIVE:
-		            //Yes button clicked
-		        	if (turnon == null || turnon.getStatus().compareTo(Status.RUNNING) != 0)
-		        	{
-		        	turnon = new TurnonNetwork();
-		        	turnon.execute(new Void[]{});
-		        	}
-		            break;
-
-		        case DialogInterface.BUTTON_NEGATIVE:
-		            //No button clicked
-		        	finish();
-		            break;
-		        }
-			}
-        };
+//        dialogClickListener = new DialogInterface.OnClickListener() 
+//        {
+//			public void onClick(DialogInterface arg0, int arg1) 
+//			{
+//				// TODO Auto-generated method stub
+//		        switch (arg1)
+//		        {
+//		        case DialogInterface.BUTTON_POSITIVE:
+//		            //Yes button clicked
+//		        	if (turnon == null || turnon.getStatus().compareTo(Status.RUNNING) != 0)
+//		        	{
+//		        	turnon = new TurnonNetwork();
+//		        	turnon.execute(new Void[]{});
+//		        	}
+//		            break;
+//
+//		        case DialogInterface.BUTTON_NEGATIVE:
+//		            //No button clicked
+//		        	finish();
+//		            break;
+//		        }
+//			}
+//        };
         
             builder = new BRAlertDialogue(this);
     	//builder = new AlertDialog.Builder(this);
@@ -148,15 +156,18 @@ public class MainActivity extends Activity {
     //    builder = new BRAlertDialogue(getApplicationContext());
 
    	   
-       if (isOnline())
-       {
-       	jsonloader = new JSONLoader();
-       	jsonloader.execute(new ListView[]{listView});
-       }
-       else
-       {
-       	builder.show();
-       }
+//       if (isOnline())
+//       {
+//       	jsonloader = new JSONLoader();
+//       	jsonloader.execute(new ListView[]{listView});
+//       }
+//       else
+//       {
+//       	builder.show();
+//       }
+       
+       BRTJSONDataLoader brt = new BRTJSONDataLoader(this);
+       brt.execute("http://strong-earth-32.heroku.com/stores.aspx");
         
 
     }
@@ -292,13 +303,16 @@ public class MainActivity extends Activity {
 
 		@Override
 		protected void onPostExecute(ArrayList<Store> result) {
-			// TODO Auto-generated method stub
+			if (result == null) {
+				builder.show();
+			} else {
 			storeslist = result;
             storeadapter = new StoreAdapter(getBaseContext(), R.layout.storelayout, storeslist);
             listView.setAdapter(storeadapter);
             pbar.setVisibility(View.INVISIBLE);
             loading.setVisibility(View.INVISIBLE);
 			super.onPostExecute(result);
+			}
 		}
 		
 		public void saveJSON(String jsonstring)
@@ -340,7 +354,6 @@ public class MainActivity extends Activity {
 			File filePath = getFileStreamPath(fileName + ".jpg");
 			return BitmapFactory.decodeFile(filePath.getPath());
 		}
-		
 
 		
 	}
@@ -475,6 +488,25 @@ public class MainActivity extends Activity {
 	        	
 				return true;
 			}
+		}
+
+		public void onPostJSONLoaderExecute(Object result) {
+			if (result == null){
+				builder.show();
+			} else {
+			storeslist = (ArrayList<Store>) result;
+			BRStores.setStores(storeslist);
+            storeadapter = new StoreAdapter(getBaseContext(), R.layout.storelayout, storeslist);
+            listView.setAdapter(storeadapter);
+            pbar.setVisibility(View.INVISIBLE);
+            loading.setVisibility(View.INVISIBLE);
+			}
+			
+		}
+
+		public void onPreJSONLoaderExecute() {
+			// TODO Auto-generated method stub
+			
 		}
 
 }

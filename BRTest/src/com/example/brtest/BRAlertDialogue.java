@@ -11,14 +11,12 @@ private MainActivity mainActivity;
 	public BRAlertDialogue(Context arg0) {
 		super(arg0);
 		mainActivity = (MainActivity) arg0;
-       	this.setTitle("Network error!");
-        this.setMessage("A data connection is required, Do you want to create the connection?");
+       	this.setTitle("No network connection");
+        this.setMessage("Mobile data is disabled. Connect to Wi-Fi network instead, or enable mobile data and try again");
         this.setPositiveButton("Yes", this);
-      //  this.setNegativeButton("No", this);
 	}
 
 	public void onClick(DialogInterface dialog, int which) {
-		
 		mainActivity.finish();
 	}
 
