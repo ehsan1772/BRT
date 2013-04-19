@@ -18,7 +18,7 @@ public class BRTTabletFragmentManager extends BRTFragmentManager {
 		Fragment secondFragment = new BRTStoreDetailFragment();
 		FragmentTransaction transaction = fragmentManager
 				.beginTransaction();
-//		transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+		transaction.setCustomAnimations(R.anim.slide_in, R.anim.slide_out);
 		transaction.replace(R.id.second_layout, secondFragment);
 		
 		transaction.commit();

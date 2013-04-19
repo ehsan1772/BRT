@@ -9,8 +9,8 @@ package com.example.brtest;
 
 public final class R {
     public static final class anim {
-        public static final int slide_in_left=0x7f040000;
-        public static final int slide_out_right=0x7f040001;
+        public static final int slide_in=0x7f040000;
+        public static final int slide_out=0x7f040001;
     }
     public static final class attr {
     }
