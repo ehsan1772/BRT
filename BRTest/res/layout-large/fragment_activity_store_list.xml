@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:weightSum="1.0" >
+
+    <FrameLayout
+        android:id="@+id/first_layout"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".5" >
+
+        <fragment
+            android:id="@+id/listView1"
+            android:name="com.example.brtest.fragments.BRTStoreListFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/second_layout"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".5" >
+
+
+    </FrameLayout>
+
+</LinearLayout>

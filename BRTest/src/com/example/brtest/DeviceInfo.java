@@ -1,0 +1,16 @@
+package com.example.brtest;
+
+public enum DeviceInfo {
+	TABLET_VERTICAL,
+	TABLET_HORIZONTAL,
+	PHONE_VERTICAL,
+	PHONE_HORIZONTAL,
+	UNDEFINED,
+	TABLET,
+	PHONE,
+	VERTICAL,
+	HORIZONTAL,
+	LARGE,
+	XLARGE,
+	NORMAL
+}

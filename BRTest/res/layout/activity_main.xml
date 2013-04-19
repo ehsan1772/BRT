@@ -11,13 +11,13 @@
         android:layout_centerHorizontal="true" 
         android:layout_centerVertical="true"/>
         
-    <com.example.brtest.BRListView
+    <com.example.brtest.views.BRTListView
         android:id="@+id/listView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true" >
+        android:layout_centerHorizontal="true" />
 
-    </com.example.brtest.BRListView>
+
 
     <TextView
         android:id="@+id/loadingtext"

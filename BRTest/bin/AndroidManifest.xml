@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".StoreView"
+            android:name=".BRTStoreViewActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_main" >
         </activity>

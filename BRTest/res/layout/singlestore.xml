@@ -25,10 +25,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:text="Macy&apos;s (1234)"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="Macy's (1234)" />
-
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/saddress"
             android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
             android:lines="2"
             android:text="7801 Citrus Park Town Center Mall"
             android:textSize="15sp" />
-
+
         <TextView
             android:id="@+id/sphone"
             android:layout_width="wrap_content"
@@ -46,16 +46,15 @@
             android:layout_marginTop="10dp"
             android:autoLink="phone"
             android:text="(813) 926-7301" />
-
     </LinearLayout>
 
     <TextView
         android:id="@+id/coordinate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
         android:autoLink="map"
         android:text="40.446195, -79.948862"
         android:textSize="15sp" />
