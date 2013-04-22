@@ -1,55 +1,70 @@
 package com.example.brtest.fragments;
 
 import com.example.brtest.R;
-import com.example.brtest.model.BRTStoreDisplay;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import com.example.brtest.model.BRTStore;
+import activities.MainActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * This fragment displays the information of one of the stores in detail
+ * 
+ * @author Ehsan Barekati
+ * 
+ */
 public class BRTStoreDetailFragment extends Fragment {
-
 	private View root;
-	
+	private BRTStore theStore;
+	private ImageView logoView;
+	private TextView nameView;
+	private TextView phoneView;
+	private TextView addressView;
+	private TextView coordinateView;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-
 		root = inflater.inflate(R.layout.singlestore, container, false);
-
-		
-		String address = BRTStoreDisplay.getLongAddress();
-		String phone = BRTStoreDisplay.getPhone();
-		String name = BRTStoreDisplay.getLongName();
-		String coordinate = BRTStoreDisplay.getCoordinate();
-		byte[] logoByte = BRTStoreDisplay.getBitmapdata();
-		
-		Bitmap bLogo = BitmapFactory.decodeByteArray(logoByte, 0, logoByte.length);
-		
-		ImageView logoView = (ImageView) root.findViewById(R.id.storeLogo);
-		TextView nameView = (TextView) root.findViewById(R.id.sname);
-		TextView phoneView = (TextView) root.findViewById(R.id.sphone);
-		TextView addressView = (TextView) root.findViewById(R.id.saddress);
-		TextView coordinateView = (TextView) root.findViewById(R.id.coordinate);
-		
-		logoView.setImageBitmap(bLogo);
-		nameView.setText(name);
-		phoneView.setText(phone);
-		addressView.setText(address);
-		coordinateView.setText(coordinate);
-		coordinateView.setTextColor(Color.GRAY);
-		
-		Log.d("coordinate = ", coordinate);
-		
+		getStore();
+		getViews();
+		setViews();
 		return root;
 	}
 
+	/**
+	 * Gets the store that should be shown by invoking a static method on the
+	 * MainActivity class
+	 */
+	private void getStore() {
+		theStore = MainActivity.getfManager().getStoreToShow();
+	}
+
+	/**
+	 * Finds all the views that are in the layout
+	 */
+	private void getViews() {
+		logoView = (ImageView) root.findViewById(R.id.storeLogo);
+		nameView = (TextView) root.findViewById(R.id.sname);
+		phoneView = (TextView) root.findViewById(R.id.sphone);
+		addressView = (TextView) root.findViewById(R.id.saddress);
+		coordinateView = (TextView) root.findViewById(R.id.coordinate);
+	}
+
+	/**
+	 * Sets all the views content to the right value.
+	 */
+	private void setViews() {
+		logoView.setImageBitmap(theStore.getLogo());
+		nameView.setText(theStore.getLongName());
+		phoneView.setText(theStore.getPhone());
+		addressView.setText(theStore.getLongAddress());
+		coordinateView.setText(theStore.getCoordinate());
+		coordinateView.setTextColor(Color.GRAY);
+	}
 }

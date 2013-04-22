@@ -1,33 +1,25 @@
 package com.example.brtest.fragments;
 
-import java.io.ByteArrayOutputStream;
-
+import activities.BRTStoreViewActivity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 
-import com.example.brtest.BRTStoreViewActivity;
-import com.example.brtest.model.BRTStore;
-import com.example.brtest.model.BRTStoreDisplay;
-
+/**
+ * An extension of BRTFragmentManager that initializes different activities on a
+ * handset
+ * 
+ * @author Ehsan Barekati
+ * 
+ */
 public class BRTPhoneFragmentManager extends BRTFragmentManager {
-
 	@Override
-	public void startStoreDetail(Object arg, Context context) {
-    	BRTStore thestore = (BRTStore) arg;
-    	
-		   
+	public void startStoreDetail(int arg, Context context) {
+		super.startStoreDetail(arg, context);
 		Intent intent = new Intent(context, BRTStoreViewActivity.class);
-
-							
 		context.startActivity(intent);
-		
 	}
 
 	@Override
 	public void startStoreList(Object arg) {
-		// TODO Auto-generated method stub
-		
 	}
-
 }
