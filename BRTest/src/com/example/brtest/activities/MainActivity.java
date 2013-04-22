@@ -9,17 +9,19 @@ import com.example.brtest.fragments.BRTTabletFragmentManager;
 import com.example.brtest.network.BRTCacheManager;
 import com.example.brtest.network.BRTNetworkManager;
 import com.example.brtest.views.BRTAlertDialogue;
-
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
 public class MainActivity extends FragmentActivity {
 	private static BRTFragmentManager fManager;
-	public static Resources resources;
+	private static Resources resources;
+	private ProgressBar progressBar;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class MainActivity extends FragmentActivity {
 		initiateFragmentManager(DeviceInfoDetector.getDeviceInfo(this));
 		this.getResources();
 		resources = getResources();
+		progressBar = (ProgressBar) findViewById(R.id.main_progressBar);
 	}
 
 	/**
@@ -58,6 +61,10 @@ public class MainActivity extends FragmentActivity {
 		return fManager;
 	}
 
+	public static Resources getBRTResources() {
+		return resources;
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflator = getMenuInflater();
@@ -74,13 +81,25 @@ public class MainActivity extends FragmentActivity {
 	/**
 	 * If the device has network access, restarts the application
 	 */
-	private void restartApplication() {
+	public void restartApplication() {
 		if (!BRTNetworkManager.isConnected()) {
 			(new BRTAlertDialogue(this, false)).show();
 		} else {
 			BRTCacheManager.deleteStoreList();
 			finish();
 			startActivity(getIntent());
+		}
+	}
+
+	public void addProgressBar() {
+		if (progressBar != null) {
+			progressBar.setVisibility(View.VISIBLE);
+		}
+	}
+
+	public void removeProgressBar() {
+		if (progressBar != null) {
+			progressBar.setVisibility(View.INVISIBLE);
 		}
 	}
 }

@@ -9,7 +9,6 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.example.brtest.exceptions.ExceptionHandler;
 import com.example.brtest.model.BRTStore;
 import android.app.Activity;

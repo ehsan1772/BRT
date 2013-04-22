@@ -151,7 +151,7 @@ public class BRTStore implements Serializable {
 	}
 
 	private Bitmap resize(Bitmap bitmap, int lineHeight) {
-		int newHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, lineHeight, MainActivity.resources.getDisplayMetrics());
+		int newHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, lineHeight, MainActivity.getBRTResources().getDisplayMetrics());
 		double nw = (bitmap.getWidth() * newHeight) / bitmap.getHeight();
 		Bitmap bitmapOrig = Bitmap.createScaledBitmap(bitmap, (int) nw,
 				newHeight, false);

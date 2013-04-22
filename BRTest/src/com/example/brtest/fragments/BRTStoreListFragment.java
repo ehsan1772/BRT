@@ -18,13 +18,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 /**
- * This class is a fragment that displays a list of all the stores 
+ * This class is a fragment that displays a list of all the stores
+ * 
  * @author Ehsan Barekati
- *
+ * 
  */
 public class BRTStoreListFragment extends Fragment implements
 		BRTJSONDataLoaderOwner {
@@ -32,9 +31,7 @@ public class BRTStoreListFragment extends Fragment implements
 	private BRTStoreAdapter storeadapter;
 	private ArrayList<BRTStore> storeslist;
 	private BRTAlertDialogue builder;
-	private TextView loading;
 	private BRTListView listView;
-	private ProgressBar pbar;
 	private static final String URL = "http://strong-earth-32.heroku.com/stores.aspx";
 
 	@Override
@@ -42,7 +39,6 @@ public class BRTStoreListFragment extends Fragment implements
 			Bundle savedInstanceState) {
 		root = inflater.inflate(R.layout.activity_main, container, false);
 		getViews();
-		setStateLoading();
 		setListView();
 		return root;
 	}
@@ -75,24 +71,18 @@ public class BRTStoreListFragment extends Fragment implements
 	}
 
 	private void setStateLoading() {
-		loading.setVisibility(View.INVISIBLE);
-		pbar.setVisibility(View.INVISIBLE);
+		((MainActivity) getActivity()).addProgressBar();
 	}
 
 	private void setStateLoaded() {
-		pbar.setVisibility(View.INVISIBLE);
-		loading.setVisibility(View.INVISIBLE);
-	}
-
-	public void onPreJSONLoaderExecute() {
-		loading.setText("Loading...");
-		pbar.setVisibility(View.VISIBLE);
-		loading.setVisibility(View.VISIBLE);
+		((MainActivity) getActivity()).removeProgressBar();
 	}
 
 	private void getViews() {
-		pbar = (ProgressBar) root.findViewById(R.id.progressBar1);
-		loading = (TextView) root.findViewById(R.id.loadingtext);
 		listView = (BRTListView) root.findViewById(R.id.listView1);
+	}
+
+	public void onPreJSONLoaderExecute() {
+		setStateLoading();
 	}
 }

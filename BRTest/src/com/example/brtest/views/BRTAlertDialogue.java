@@ -1,6 +1,7 @@
 package com.example.brtest.views;
 
 import com.example.brtest.activities.MainActivity;
+import com.example.brtest.network.BRTNetworkManager;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -18,18 +19,35 @@ public class BRTAlertDialogue extends AlertDialog.Builder implements
 		DialogInterface.OnClickListener {
 	private MainActivity mainActivity;
 	private boolean closeApp;
+	private Context context;
 
 	public BRTAlertDialogue(Context arg0, boolean closeApp) {
 		super(arg0);
+		context = arg0;
 		this.closeApp = closeApp;
 		mainActivity = (MainActivity) arg0;
 		this.setTitle("No network connection");
-		this.setMessage("Mobile data is disabled. Connect to Wi-Fi network instead, or enable mobile data and try again");
-		this.setPositiveButton("Ok", this);
+		this.setMessage("No network access is available. Do you want to enable it?");
+		this.setPositiveButton("Yes", this);
+		this.setNegativeButton("No", this);
 	}
 
 	public void onClick(DialogInterface dialog, int which) {
-		if (closeApp)
-			mainActivity.finish();
+		switch (which) {
+		case DialogInterface.BUTTON_POSITIVE:
+			try {
+				BRTNetworkManager.connect(context, true);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+
+		case DialogInterface.BUTTON_NEGATIVE:
+			if (closeApp)
+				mainActivity.finish();
+			break;
+		}
+
 	}
 }
