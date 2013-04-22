@@ -5,11 +5,14 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URL;
 
+import com.example.brtest.activities.MainActivity;
 import com.example.brtest.exceptions.ExceptionHandler;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
+import android.util.TypedValue;
 
 /**
  * This class represents one of the stores as a Serializable class that is used
@@ -118,7 +121,7 @@ public class BRTStore implements Serializable {
 		try {
 			URL url = new URL(value);
 			InputStream content = (InputStream) url.getContent();
-			logo = resize(BitmapFactory.decodeStream(content), 70);
+			logo = resize(BitmapFactory.decodeStream(content), 40);
 		} catch (Exception e) {
 			ExceptionHandler.handleSetLogoException(e);
 		}
@@ -147,7 +150,8 @@ public class BRTStore implements Serializable {
 		return logoByteArray;
 	}
 
-	private Bitmap resize(Bitmap bitmap, int newHeight) {
+	private Bitmap resize(Bitmap bitmap, int lineHeight) {
+		int newHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, lineHeight, MainActivity.resources.getDisplayMetrics());
 		double nw = (bitmap.getWidth() * newHeight) / bitmap.getHeight();
 		Bitmap bitmapOrig = Bitmap.createScaledBitmap(bitmap, (int) nw,
 				newHeight, false);

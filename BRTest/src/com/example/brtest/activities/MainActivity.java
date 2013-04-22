@@ -9,6 +9,8 @@ import com.example.brtest.fragments.BRTTabletFragmentManager;
 import com.example.brtest.network.BRTCacheManager;
 import com.example.brtest.network.BRTNetworkManager;
 import com.example.brtest.views.BRTAlertDialogue;
+
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
@@ -17,12 +19,15 @@ import android.view.MenuItem;
 
 public class MainActivity extends FragmentActivity {
 	private static BRTFragmentManager fManager;
+	public static Resources resources;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_activity_store_list);
 		initiateFragmentManager(DeviceInfoDetector.getDeviceInfo(this));
+		this.getResources();
+		resources = getResources();
 	}
 
 	/**
