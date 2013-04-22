@@ -10,7 +10,8 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
-import exceptions.ExceptionHandler;
+
+import com.example.brtest.exceptions.ExceptionHandler;
 
 /**
  * This class has one public static method that gets a url and returns a JSON object

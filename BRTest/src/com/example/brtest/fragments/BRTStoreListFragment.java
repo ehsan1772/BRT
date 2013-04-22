@@ -3,6 +3,7 @@ package com.example.brtest.fragments;
 import java.util.ArrayList;
 
 import com.example.brtest.R;
+import com.example.brtest.activities.MainActivity;
 import com.example.brtest.interfaces.BRTJSONDataLoaderOwner;
 import com.example.brtest.model.BRTStore;
 import com.example.brtest.model.BRTStores;
@@ -12,7 +13,6 @@ import com.example.brtest.network.BRTNetworkManager;
 import com.example.brtest.views.BRTAlertDialogue;
 import com.example.brtest.views.BRTListView;
 import com.example.brtest.views.BRTStoreAdapter;
-import activities.MainActivity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;

@@ -1,6 +1,7 @@
 package com.example.brtest.fragments;
 
-import activities.BRTStoreViewActivity;
+import com.example.brtest.activities.BRTStoreViewActivity;
+
 import android.content.Context;
 import android.content.Intent;
 

@@ -1,4 +1,4 @@
-package activities;
+package com.example.brtest.activities;
 
 import com.example.brtest.DeviceInfo;
 import com.example.brtest.DeviceInfoDetector;

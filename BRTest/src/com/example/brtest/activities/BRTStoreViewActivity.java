@@ -1,8 +1,6 @@
-package activities;
+package com.example.brtest.activities;
 
 import com.example.brtest.R;
-import com.example.brtest.R.layout;
-
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 

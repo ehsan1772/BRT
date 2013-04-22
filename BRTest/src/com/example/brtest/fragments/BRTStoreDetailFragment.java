@@ -1,8 +1,8 @@
 package com.example.brtest.fragments;
 
 import com.example.brtest.R;
+import com.example.brtest.activities.MainActivity;
 import com.example.brtest.model.BRTStore;
-import activities.MainActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

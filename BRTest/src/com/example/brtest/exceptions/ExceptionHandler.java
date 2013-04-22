@@ -1,4 +1,4 @@
-package exceptions;
+package com.example.brtest.exceptions;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

@@ -1,6 +1,7 @@
 package com.example.brtest.views;
 
-import activities.MainActivity;
+import com.example.brtest.activities.MainActivity;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
