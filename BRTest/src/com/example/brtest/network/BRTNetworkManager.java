@@ -137,7 +137,6 @@ public class BRTNetworkManager {
 	private class DelayHandler extends AsyncTask<Void, Void, Void> {
 		@Override
 		protected void onPostExecute(Void result) {
-			context.unregisterReceiver(receiver);
 			if (!BRTNetworkManager.isConnected()) {
 				BRTNetworkAlertDialogue dialogue = new BRTNetworkAlertDialogue(
 						context);

@@ -85,6 +85,7 @@ public class MainActivity extends FragmentActivity {
 		if (!BRTNetworkManager.isConnected()) {
 			(new BRTAlertDialogue(this, false)).show();
 		} else {
+			if (BRTCacheManager.openStoreList() != null)
 			BRTCacheManager.deleteStoreList();
 			finish();
 			startActivity(getIntent());
@@ -94,6 +95,7 @@ public class MainActivity extends FragmentActivity {
 	public void addProgressBar() {
 		if (progressBar != null) {
 			progressBar.setVisibility(View.VISIBLE);
+			progressBar.bringToFront();
 		}
 	}
 
